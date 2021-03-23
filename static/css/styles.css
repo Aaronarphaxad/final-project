@@ -1,0 +1,44 @@
+* {
+    outline: none;
+    box-sizing: border-box;
+   }
+
+   body {
+    line-height:1.5;
+      padding: 25px;
+      background-color: white;
+      color: black;
+      font-size: 25px;
+    }
+
+
+    .dark-mode {
+        background: #272727;
+        filter: invert(1) hue-rotate(210deg);
+    }
+
+    #dark-g{
+        border-radius: 50%;
+    }
+
+    #dark-g:focus{
+        outline-style: none;
+        border-style: none;
+
+    }
+
+    .dark-moon{
+        transform: rotate(90deg);
+        fill: yellow;
+        transition: transform 1s;
+    }
+
+    .dark-container{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+.logo { 
+    max-height: 10%;
+    max-width: 20%; 
+}
