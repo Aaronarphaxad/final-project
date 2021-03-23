@@ -7,7 +7,8 @@ __pycache__/
 *.so
 
 #outer folders
-../
+FinalProject/
+sss
 
 # Distribution / packaging
 .Python
