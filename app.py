@@ -12,7 +12,8 @@ from decouple import config
 from helpers import login_required, mark
 import time
 import random
-
+import json
+from formParser import formparser,getInitialList,getFinalList
 # Configure application
 app = Flask(__name__)
 
@@ -182,9 +183,25 @@ def question():
 @login_required
 def question_me():
     if request.method=="POST":
-        results = request.form
-        print(results)
-        #correct = mark(results)
-        return ('Congratulations you got {0} correct'.format(correct))
+        results = request.get_json()
+        score = mark(results)
+    return render_template('congratulations.html', score=score)
 
+@app.route('/generate-questions', methods=["POST","GET"])
+# @login_required
+def generate_questions():
+    if request.method=="POST":
+        topic,questions,options,correctAnwer = formparser(request)
+        answers,questionsSmallBatch = getInitialList(questions,options,correctAnwer,realOptions=[],answersList=[])
+        print(questionsSmallBatch)
 
+        # questionToPersist = {
+        #     topic:bigOptionList,
+        #     topic+'Answers':correctAnwer
+        # }
+        return render_template('questionGetter.html')
+    if request.method == "GET":
+        return render_template('questionGetter.html')
+                
+        
+       

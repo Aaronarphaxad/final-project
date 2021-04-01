@@ -6,5 +6,7 @@ qBank = {
         ["Deputize the need for president?","Dreads", "picnic stuff", "Disqualify", "Decouple"],
         ["How high is the Himalayan mountains","5000km", "3000km per day", "Low level", "Derailed mentally"]
 
-    ]
+    ],
+    "javascriptAnswers":[ 1,3,4,1]
+    
 }

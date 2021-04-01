@@ -18,8 +18,10 @@ def login_required(f):
 
 
 def mark(results):
-    score = 0
-    for k,v in results.items():
-        if v == '1':
-            score += 1
-    return score
+    scores=0
+    answers=results['answers']
+    correctAnswers = qBank['javascriptAnswers']
+    for answer,correctAnswer in zip(answers,correctAnswers):
+        if int(answer) == correctAnswer:
+            scores+=1
+    return scores
