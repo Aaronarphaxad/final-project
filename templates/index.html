@@ -1,82 +1,39 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- SEO Meta Tags -->
-        <meta name="description" content="The Brook is a Prayer House located in Kenya that helps people grow their relationship with Christ>
-        <meta name="author" content="Arphaxad">
+{% extends "layout.html" %}
 
-        <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
-	<meta property="og:site_name" content="rookhub" /> <!-- website name -->
-	<meta property="og:site" content="rookhub.com" /> <!-- website link -->
-	<meta property="og:title" content="Rook Hub"/> <!-- title shown in the actual shared post -->
-	<meta property="og:description" content="Rookie Hub is a website for Rookies to test their knowledge of HTML, CSS and Javascript." /> <!-- description shown in the actual shared post -->
-	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-	<meta property="og:type" content="article" />
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% block title %}
+Home
+{% endblock %}
 
-        <!-- Website title -->
-        <title>Rook Hub</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}">
-        <!-- Favicon  -->
-        <link rel="shortcut icon" href="{{url_for('static',filename = 'images/favicon.ico')}}">
-        <!-- Font awesome -->
-        <script src="https://kit.fontawesome.com/c0ab3d7e30.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="dark-container"><button id= "dark-g" onclick="myfunction()"><i class="dark-button far fa-moon"></i></button></div>
-
-        
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#"><img class="logo img-responsive" src="{{url_for('static',filename = 'images/logo-dark.png')}}" alt="major-menace-logo"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="">History</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Scoreboard</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Logout</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+{% block main %}
 
 
-          
-          
+ 
+<div class="rotate-div">
+  <div><h1 class="index-h1 mx-auto">ARE YOU A ROOKIE DEVELOPER?</h1><br>
+    <h2>Test your knowledge on</h2></div>
 
-        
-      <form action="">
-        <h1>Questions</h1>
-        <p>1. What is an array?</p>
-        <input type="radio" name="first" value="first">
-        <label for="first">{{javascript.first[0]}}</label><br>
-        <input type="radio" name="second" value="second">
-        <label for="second">{{javascript.first[1]}}</label><br>
-        <input type="radio" name="third" value="third">
-        <label for="third">{{javascript.first[2]}}</label><br>
-        <input type="radio" name="fourth" value="fourth">
-        <label for="fourth">{{javascript.first[3]}}</label><br>
-        <input type="submit" value="submit">
-      </form>
+  <!-- Rotating span -->
+  <span id="js-rotating" class="py-4">
+    <p class="rotate-text">Javascript </p>, 
+    <p class="rotate-text">CSS </p>, 
+    <p class="rotate-text">HTML </p>
+  </span>
+  <br>
+  
+<!-- Js, css, and html icons -->
 
-        <p>2. What is a function?</p>
+  <img class="img-rotate" src="{{url_for('static',filename = 'images/js.png')}}">
+  <img class="img-rotate" src="{{url_for('static',filename = 'images/css.png')}}">
+  <img class="img-rotate" src="{{url_for('static',filename = 'images/html.png')}}">
 
-        <!-- Scripts -->
-        <script src="{{url_for('static', filename='js/myscript.js')}}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    </body>
-</html>
+  <br>
+
+
+  <a class="get-started"  href="/register" >
+  <button type="button" class="cta-btn btn btn-dark mx-auto my-5 p-4">GET STARTED</button>
+  </a>
+  </div>
+</div>
+
+
+{% endblock %}

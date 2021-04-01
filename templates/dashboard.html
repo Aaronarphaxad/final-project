@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+
+<h1 class="index-h1 mb-4">Let's get started</h1>
+
+<h3>RULES</h3>
+<hr>
+    <ul>
+    <li>You have 15 minutes to submit all answers.</li>
+    <li>Double-check your answers before submitting.</li>
+    </ul>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card my-3" style="width: 18rem;">
+            <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/js.png')}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">20 questions in javascript section, which would cover every important topic a beginner needs to know. This Section is 50% of the overall score.</p>
+        </div>
+      </div>    
+    </div>
+      <div class="col-sm">
+        <div class="card my-3" style="width: 18rem;">
+            <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/css.png')}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">10 questions on Cascading Style Sheets which would challenge the rookie to learn more. It is 25% of the overall score. </p>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm">
+        <div class="card my-3" style="width: 18rem;">
+            <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/html.png')}}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Some interesting, non-conventional HTML questions. It is 25% of the overall score.</p>
+            </div>
+        </div> <!--Card close-->
+      </div> <!--Column close-->
+    </div> <!--Row close-->
+</div> <!--Container close-->
+
+<a href="/questions" class="mx-auto race button"><img src="{{url_for('static',filename = 'images/race.png')}}"></a>
+
+{% endblock %}

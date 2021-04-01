@@ -9,9 +9,64 @@
       background-color: white;
       color: black;
       font-size: 25px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1 h2 {
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .rotate-text{
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .cta-btn:hover{
+        background-color: rgb(131, 63, 148) !important;
     }
 
 
+    .img-rotate{
+        height: 15%;
+        width: 15%;
+        margin: 20px;
+        transition: width 1s;
+        margin-top: 20px;
+    }
+
+    .img-rotate:hover{
+        height: 20%;
+        width: 20%;
+        transition: width 1s;
+    }
+
+    .rotate-div{
+        text-align:center;
+        overflow: hidden;
+    }
+
+    #js-rotating{
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .index-h1{
+        font-family: 'Orbitron', sans-serif;
+        text-shadow: 0px 0px 7px rgba(157, 62, 180, 0.75);
+        color: #141414;
+        font-size: 40px;
+    }
+    
+   #logo-id{
+       max-width: fit-content;
+   }
+
+   .logo { 
+    max-height: 150px;
+    max-width: 150px; 
+}
+
+    /* DARK MODE */
     .dark-mode {
         background: #272727;
         filter: invert(1) hue-rotate(210deg);
@@ -24,7 +79,6 @@
     #dark-g:focus{
         outline-style: none;
         border-style: none;
-
     }
 
     .dark-moon{
@@ -38,7 +92,23 @@
         justify-content: flex-end;
     }
 
-.logo { 
-    max-height: 10%;
-    max-width: 20%; 
+
+/* ========================================BUTTON=============================================== */
+.get-started{
+    color: white;
+}
+.get-started:hover{
+    text-decoration: none;
+    color: whitesmoke;
+
+}
+
+
+/* .navbar-brand{
+    max-height: 20%;
+    max-width: 40%;
+} */
+
+#footer{
+padding: 50px;
 }

@@ -9,7 +9,9 @@ __pycache__/
 #outer folders
 FinalProject/
 sss
+.env
 
+sqlite/
 # Distribution / packaging
 .Python
 build/

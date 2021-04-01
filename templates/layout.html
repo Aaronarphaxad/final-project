@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="The Brook is a Prayer House located in Kenya that helps people grow their relationship with Christ>
+        <meta name="author" content="Arphaxad">
+
+        <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="rookhub" /> <!-- website name -->
+	<meta property="og:site" content="rookhub.com" /> <!-- website link -->
+	<meta property="og:title" content="Rook Hub"/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="Rookie Hub is a website for Rookies to test their knowledge of HTML, CSS and Javascript." /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Website title -->
+        <title>Rook Hub</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+        <!-- Favicon  -->
+        <link rel="shortcut icon" href="{{url_for('static',filename = 'images/favicon.ico')}}">
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/c0ab3d7e30.js" crossorigin="anonymous"></script>
+        <!-- Morphext rotate text in home page -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/morphext.css') }}">
+    </head>
+    <body>
+        <!-- Darkmode icon -->
+        <div class="dark-container"><button id= "dark-g" onclick="myfunction()"><i class="dark-button far fa-moon"></i></button></div>
+
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border mt-2">
+            <div class="container-fluid">
+              <a id='logo-id' class="navbar-brand p-0" href="/"><img class="logo py-4" src="{{url_for('static',filename = 'images/logo-dark.png')}}" alt="rookhub logo"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                {% if session.user_id %}
+                    <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/history">History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Leaderboard</a>
+                        </li>
+                        <li class="nav-item mr-auto">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">login</a>
+                        </li>
+                    </ul>
+            {% endif %}
+              </div> <!--end navitem container -->
+              
+            </div> <!--end navbar container fluid -->
+          </nav> <!--end nav bar -->
+           
+          <!-- Main body -->
+          <main class="container p-5">
+            {% block main %}{% endblock %}
+          </main>
+          
+
+        <footer id='footer' class="small text-center text-muted">
+            <p> CS50 Final Project by <a href="https://twitter.com/_Arphyy_">Aaron Omale</a></p>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="//cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
+        <script src="{{url_for('static', filename='js/myscript.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="{{url_for('static', filename='js/morphext.js')}}"></script>
+        <script src="{{url_for('static', filename='js/morphext.min.js')}}"></script>
+        <script>
+            $("#js-rotating").Morphext({
+                animation: "bounce",
+                speed: 3000,
+                complete: function () {
+                    console.log("This is called after a phrase is animated in! Current phrase index: " + this.index);
+                }
+            });
+        </script>
+    </body>
+</html>
