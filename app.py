@@ -10,7 +10,6 @@ import sqlite3
 from flask_mail import Mail, Message
 from decouple import config
 from helpers import login_required, mark
-import time
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList

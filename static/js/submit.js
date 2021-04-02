@@ -34,3 +34,20 @@ submitButton.addEventListener("click", (e) => {
 
 
 })
+
+  fetch("/question-me", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataToSend),
+  }).then(function(result){
+    return result.text()
+  }).then(function(data){
+    const documentReplacement = document.createElement('main')
+    documentReplacement.innerHTML = data;
+    const oldPage = document.getElementsByTagName('main')[0];
+    document.body.replaceChild(documentReplacement,oldPage);
+  });
+});
+
