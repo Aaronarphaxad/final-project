@@ -13,3 +13,5 @@ flask-sqlalchemy==2.5.1
 greenlet==1.0.0
 blinker==1.4 
 flask-mail==0.9.1
+
+.
