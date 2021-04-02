@@ -8,7 +8,7 @@
 
 
     
-<!-- {% for bank in qBank.javascript %}
+{% for bank in qBank.javascript %}
     <form class="formElem">
         <p>{{loop.index}}. {{bank[0]}} </p> 
         <input type="radio" name='option' value={{value+1}}> {{bank[1]}} <br>
@@ -18,63 +18,10 @@
         <br>
     </form>
 {% endfor %}
-    <input class="submitButton" type="submit"> -->
+    <input class="submitButton" type="submit">
 
 
-    {% for bank in qBank.javascript %}
-    <form action="/question-me" method="POST">
-        <p>{{loop.index}}. {{bank[0]}} </p>
-    <div class="form-check">
-        <input type="radio" value="{{value+1}}" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">{{bank[1]}}</label>
-      </div> <br>
-      <div class="form-check">
-        <input type="radio" value="{{value+2}}" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">{{bank[2]}}</label>
-      </div><br>
-      <div class="form-check">
-        <input type="radio" value="{{value+3}}" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">{{bank[3]}}</label>
-      </div><br>
-      <div class="form-check">
-        <input type="radio" value="{{value+4}}" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">{{bank[4]}}</label>
-      </div><br>
-    </form>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary">Submit</button>
-    
-
-   
-<!-- <script>
-    
 
     
-    const submitButton = document.querySelector('.submitButton')
-submitButton.addEventListener('click', (e)=>{
-    e.preventDefault()
-    
-    const formElem = document.querySelectorAll(".formElem")
-    console.log(formElem)
- 
-    dataGathered = {}
-    for (let forms in formElem){
-        dataGathered[forms]= forms.input.checked===true;
-    }
-
-    console.log(dataGathered)
-    fetch('/question-me',
-    {
-        method:'POST',
-        headers:{
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body:formList
-    }).then(response)
-
-
-})
-</script> -->
-
-<!-- <script src="{{url_for('static',filename = 'js/submit.js')}}"></script> -->
+    <script src="{{ url_for('static', filename='js/submit.js') }}"></script>
 {% endblock %}
