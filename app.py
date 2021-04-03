@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # # configure SQLITE
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 
 db = SQLAlchemy(app)
 class users(db.Model):
