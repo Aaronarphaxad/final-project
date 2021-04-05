@@ -117,8 +117,12 @@
 }
 
 .btn{
-    /* width: 25px;
-    height: 20px;    */
+    background-color: violet i !important;
+}
+
+.start-btn{
+    color: white;
+    text-decoration: none;
 }
 
 
