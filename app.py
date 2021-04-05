@@ -98,6 +98,10 @@ def history():
     return render_template("showAll.html", message= "message", users = users.query.all())
 
 
+@app.route("/documentation", methods=["GET", "POST"])
+def documentation():
+    return render_template("documentation.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
