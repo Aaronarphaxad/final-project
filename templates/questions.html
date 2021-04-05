@@ -7,14 +7,14 @@
 {% block main %}
 
 
-    
-{% for bank in qBank.javascript %}
+<p><strong>{{questions.topic}}</strong></p>
+{% for question in questions['data'] %}
     <form class="formElem">
-        <p>{{loop.index}}. {{bank[0]}} </p> 
-        <input type="radio" name='option' value={{value+1}}> {{bank[1]}} <br>
-        <input type="radio" name='option' value={{value+2}}> {{bank[2]}} <br>
-        <input type="radio" name='option' value={{value+3}}> {{bank[3]}} <br>
-        <input type="radio" name='option' value={{value+4}}> {{bank[4]}} <br>
+        <p>{{loop.index}}. {{question['question']}} </p> 
+        <input type="radio" name='option' value={{value+1}}> {{question['options']['a']}} <br>
+        <input type="radio" name='option' value={{value+2}}> {{question['options']['b']}} <br>
+        <input type="radio" name='option' value={{value+3}}> {{question['options']['c']}} <br>
+        <input type="radio" name='option' value={{value+4}}> {{question['options']['d']}} <br>
         <br>
     </form>
 {% endfor %}

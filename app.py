@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from flask_mail import Mail, Message
 from decouple import config
-from helpers import login_required, mark
+from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList
@@ -19,12 +19,15 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# # configure SQLITE
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# configure SQLITE
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_used.db'
+
+# Define users table
 db = SQLAlchemy(app)
 class users(db.Model):
-
     id = db.Column('user_id', db.Integer, primary_key = True)
     username = db.Column(db.String(100))
     hash_ = db.Column(db.String(50))  
@@ -34,6 +37,19 @@ class users(db.Model):
         self.username = username
         self.hash_ = hash_
         self.email = email
+
+class questions_bank(db.Model):
+    id = db.Column('question_id', db.Integer, primary_key = True)
+    topic = db.Column(db.String(10))
+    question = db.Column(db.String(200))  
+    options = db.Column(db.String(400))
+    answer = db.Column(db.String(200))
+
+    def __init__(self, topic,question,options,answer):
+        self.topic = topic
+        self.question = question
+        self.options = options
+        self.answer = answer
 
 db.create_all()
 
@@ -62,6 +78,8 @@ app.config['MAIL_USERNAME'] = config('EMAIL')
 app.config['MAIL_PASSWORD'] = int(config('PASSWORD'))
 app.config['MAIL_USE_TLS'] =False
 app.config['MAIL_USE_SSL'] = True
+app.config['FLASK_ENV']='development'
+app.config['FLASK_DEBUG'] = True
 mail = Mail(app)
 
 
@@ -157,7 +175,6 @@ def register():
     return render_template("register.html")
 
 
-
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -174,30 +191,33 @@ def dashboard():
 
 
 @app.route('/questions')
-@login_required
+# @login_required
 def question():
-    return render_template('questions.html',qBank= qBank, question=0, value=0)
-
-@app.route('/question-me', methods=["POST","GET"])
-@login_required
-def question_me():
+    if request.method =="GET":
+        topic='javascript'
+        questions_retrieved = retrieve_questions_from_db(topic,questions_bank)
+        structured_question_to_send = format_questions_to_send(questions_retrieved,topic)
+        return render_template('questions.html',questions=structured_question_to_send,value=0)
     if request.method=="POST":
-        results = request.get_json()
+        results = request.form
+        print(results)
         score = mark(results)
     return render_template('congratulations.html', score=score)
+    # return render_template('questions.html',qBank= qBank, question=0, value=0)
 
 @app.route('/generate-questions', methods=["POST","GET"])
 # @login_required
 def generate_questions():
     if request.method=="POST":
-        topic,questions,options,correctAnwer = formparser(request)
-        answers,questionsSmallBatch = getInitialList(questions,options,correctAnwer,realOptions=[],answersList=[])
-        print(questionsSmallBatch)
-
-        # questionToPersist = {
-        #     topic:bigOptionList,
-        #     topic+'Answers':correctAnwer
-        # }
+        topic,question,option,correct = format_for_table(request)
+        add_question_to_db(
+            db_session = db.session,
+            db = questions_bank,
+            topic = topic,
+            question = question,
+            option = option,
+            correct = correct
+            )
         return render_template('questionGetter.html')
     if request.method == "GET":
         return render_template('questionGetter.html')

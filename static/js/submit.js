@@ -35,7 +35,7 @@ submitButton.addEventListener("click", (e) => {
 
 })
 
-  fetch("/question-me", {
+  fetch("/questions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
