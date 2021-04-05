@@ -10,7 +10,8 @@ __pycache__/
 FinalProject/
 sss
 .env
-
+.db
+.json
 sqlite/
 # Distribution / packaging
 .Python
