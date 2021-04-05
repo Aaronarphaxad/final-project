@@ -192,18 +192,18 @@ def dashboard():
 
 @app.route('/questions')
 # @login_required
-def question():
+def questions():
     if request.method =="GET":
         javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank)
         javascript_structured_question_to_send = format_questions_to_send(javascript_questions_retrieved,'javascript')
-        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank)
-        html_structured_question_to_send = format_questions_to_send(html_questions_retrieved,'html')
-        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank)
-        css_structured_question_to_send = format_questions_to_send(css_questions_retrieved,'css')
+        # html_questions_retrieved = retrieve_questions_from_db('html',questions_bank)
+        # html_structured_question_to_send = format_questions_to_send(html_questions_retrieved,'html')
+        # css_questions_retrieved = retrieve_questions_from_db('css',questions_bank)
+        # css_structured_question_to_send = format_questions_to_send(css_questions_retrieved,'css')
         return render_template('questions.html',
-                               javascript=javascript_structured_question_to_send,
-                               html=html_structured_question_to_send,
-                               css=css_structured_question_to_send,
+                               javascript = javascript_structured_question_to_send,
+                            #    html = html_structured_question_to_send,
+                            #    css = css_structured_question_to_send,
                                value=0)
     if request.method=="POST":
         results = request.form

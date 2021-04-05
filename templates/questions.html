@@ -34,8 +34,10 @@
        </form>
         {% endfor %}
       </div>
+
+
       <div id="html" class="container tab-pane fade">
-          {% for question in javascript['data'] %}
+        {% for question in javascript['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
         <input type="radio" name="option" value={{value+1}}> {{question['options']['a']}} <br>
@@ -46,8 +48,10 @@
        </form>
         {% endfor %}
       </div>
+
+
       <div id="css" class="container tab-pane fade">
-          {% for question in javascript['data'] %}
+        {% for question in javascript['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
         <input type="radio" name="option" value={{value+1}}> {{question['options']['a']}} <br>
@@ -60,30 +64,4 @@
       </div>
     </div>
   </div>
-
-<!-- <div class="question_page_head">
-    <div>
-        <button class="btn btn-primary">Submit</button>
-    </div>
-    <div>
-        <p class="topic__head"><strong>{{questions.topic}}</strong></p>
-    </div>
-</div>
-
-{% for question in questions['data'] %}
-    <form class="formElem">
-        <p>{{loop.index}}. {{question['question']}} </p> 
-        <input type="radio" name='option' value={{value+1}}> {{question['options']['a']}} <br>
-        <input type="radio" name='option' value={{value+2}}> {{question['options']['b']}} <br>
-        <input type="radio" name='option' value={{value+3}}> {{question['options']['c']}} <br>
-        <input type="radio" name='option' value={{value+4}}> {{question['options']['d']}} <br>
-        <br>
-    </form>
-{% endfor %}
-    <button class="btn btn-primary submitButton" type="submit">Next</button>
-
-
-
-    
-    <script src="{{ url_for('static', filename='js/submit.js') }}"></script> -->
 {% endblock %}
