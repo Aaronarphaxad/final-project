@@ -28,17 +28,15 @@ body{
   color: #000;
 }
 .tab-content{
-  position: absolute;
+  position: relative;
   width: 98%;
-  padding:30px 2.5%;
+  padding:20px 2.5%;
   height: max-content;
-  margin-bottom: 5%;
   background: #fff;
   color: #000;
   border-radius: 0;
   z-index: 1000;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
-  margin-bottom: 50px;
 }
 .tab-content button{
   border-radius: 15px;

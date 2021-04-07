@@ -1,11 +1,11 @@
-* {
+/* * {
     outline: none;
     box-sizing: border-box;
-   }
+   } */
 
    body {
     line-height:1.5;
-      padding: 40px;
+      padding: 10px;
       background-color: white;
       color: black;
       font-size: 25px;
@@ -126,9 +126,14 @@
 }
 
 .qSubmitDiv{
-    position: absolute;
-    right: 120px;
-    top: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.submitButton{
+    display: block;
+    width: 80%;
 }
 
 
