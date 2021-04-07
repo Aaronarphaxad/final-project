@@ -198,11 +198,11 @@ def dashboard():
 # @login_required
 def questions():
     if request.method =="GET":
-        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank)
+        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 15)
         javascript_structured_question_to_send = format_questions_to_send(javascript_questions_retrieved,'javascript')
-        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank)
+        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 15)
         html_structured_question_to_send = format_questions_to_send(html_questions_retrieved,'html')
-        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank)
+        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank, 15)
         css_structured_question_to_send = format_questions_to_send(css_questions_retrieved,'css')
         return render_template('questions.html',
                                javascript = javascript_structured_question_to_send,

@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request, session
 from functools import wraps
 from questionPack import qBank
+import random
 
 
 def login_required(f):
@@ -44,10 +45,10 @@ def add_question_to_db(db_session,db,topic,question,option,correct):
     db_session.add(questions)
     db_session.commit()
 
-def retrieve_questions_from_db(topic,db):
+def retrieve_questions_from_db(topic,db,limit):
     ''' retrieve the questions from the database '''
     result = db.query.filter_by(topic=topic).all()
-    return result
+    return random.sample(result,limit)
 
 
 def format_questions_to_send (db_query_result,topic):
