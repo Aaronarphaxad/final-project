@@ -5,7 +5,7 @@
 
    body {
     line-height:1.5;
-      padding: 25px;
+      padding: 40px;
       background-color: white;
       color: black;
       font-size: 25px;
@@ -123,6 +123,12 @@
 .start-btn{
     color: white;
     text-decoration: none;
+}
+
+.qSubmitDiv{
+    position: absolute;
+    right: 120px;
+    top: 200px;
 }
 
 

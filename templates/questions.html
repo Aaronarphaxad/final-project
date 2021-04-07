@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    
+    Questions
 {% endblock %}
 
 {% block main %}
-  <div class="content">
+  <div class="content m-5">
     <!-- Nav pills -->
     <ul class="nav nav-pills" role="tablist">
       <li class="nav-item">
@@ -26,10 +26,10 @@
         {% for question in javascript['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
-        <input type="radio" name="option" value={{value+1}}> {{question['options']['a']}} <br>
-        <input type="radio" name="option" value={{value+2}}> {{question['options']['b']}} <br>
-        <input type="radio" name="option" value={{value+3}}> {{question['options']['c']}} <br>
-        <input type="radio" name="option" value={{value+4}}> {{question['options']['d']}} <br>
+        <input type="radio" name="option" value={{value+1}}>  {{question['options']['a']}} <br>
+        <input type="radio" name="option" value={{value+2}}>  {{question['options']['b']}} <br>
+        <input type="radio" name="option" value={{value+3}}>  {{question['options']['c']}} <br>
+        <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
         <br>
        </form>
         {% endfor %}
@@ -37,13 +37,13 @@
 
 
       <div id="html" class="container tab-pane fade">
-        {% for question in javascript['data'] %}
+        {% for question in html['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
-        <input type="radio" name="option" value={{value+1}}> {{question['options']['a']}} <br>
-        <input type="radio" name="option" value={{value+2}}> {{question['options']['b']}} <br>
-        <input type="radio" name="option" value={{value+3}}> {{question['options']['c']}} <br>
-        <input type="radio" name="option" value={{value+4}}> {{question['options']['d']}} <br>
+        <input type="radio" name="option" value={{value+1}}>  {{question['options']['a']}} <br>
+        <input type="radio" name="option" value={{value+2}}>  {{question['options']['b']}} <br>
+        <input type="radio" name="option" value={{value+3}}>  {{question['options']['c']}} <br>
+        <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
         <br>
        </form>
         {% endfor %}
@@ -51,17 +51,25 @@
 
 
       <div id="css" class="container tab-pane fade">
-        {% for question in javascript['data'] %}
+        {% for question in css['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
-        <input type="radio" name="option" value={{value+1}}> {{question['options']['a']}} <br>
-        <input type="radio" name="option" value={{value+2}}> {{question['options']['b']}} <br>
-        <input type="radio" name="option" value={{value+3}}> {{question['options']['c']}} <br>
-        <input type="radio" name="option" value={{value+4}}> {{question['options']['d']}} <br>
+        <input type="radio" name="option" value={{value+2}}>  {{question['options']['a']}} <br>
+        <input type="radio" name="option" value={{value+3}}>  {{question['options']['b']}} <br>
+        <input type="radio" name="option" value={{value+1}}>  {{question['options']['c']}} <br>
+        <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
         <br>
        </form>
         {% endfor %}
       </div>
     </div>
   </div>
+
+  <div class="qSubmitDiv">
+    <button class="submitButton btn btn-dark p-3" type = "button">Submit</button>
+  </div>
+  
+
+  
+  
 {% endblock %}

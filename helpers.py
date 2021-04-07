@@ -27,6 +27,8 @@ def mark(results):
     #     if v == '1':
     #         score += 1
     # return score
+
+
 def format_for_table(req):
     ''' helper function to format incoming form data to be suitable for db persistence '''
     topic = request.form['topic']
@@ -56,6 +58,7 @@ def format_questions_to_send (db_query_result,topic):
         }
     data=[]
     for results in db_query_result:
+        # Remove the square brackets/comma from the string in options and store in a list. It is stored in the db as a string
         resultsList = results.options.replace(']','').replace('[','').split(',')
         data_structure = {
             "id_":results.id,
