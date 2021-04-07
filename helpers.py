@@ -18,16 +18,15 @@ def login_required(f):
     return decorated_function
 
 
-def mark(results):
+def mark(submission):
+    '''a function that receives result from the front end and marks it '''
     score = 0
-    for result in results:
-        if result[1] == '1':
-            score += 1
-        return score
-    # for k,v in results.items():
-    #     if v == '1':
-    #         score += 1
-    # return score
+    correct = submission['correct']
+    selected = submission['answers']
+    for correctOption,selectedOption in zip(correct,selected):
+        if correctOption == selectedOption:
+            score+=1
+    return score
 
 
 def format_for_table(req):
@@ -77,4 +76,8 @@ def format_questions_to_send (db_query_result,topic):
 
     question_to_send['data'] = data
     return question_to_send
-
+ 
+def percentagilize(score):
+    '''convert the scores into a percentage'''
+    percentage = (score/15) *100
+    return percentage

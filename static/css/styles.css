@@ -145,3 +145,7 @@
 #footer{
 padding: 50px;
 }
+
+.hidden {
+    display: none;
+}

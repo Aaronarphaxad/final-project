@@ -30,6 +30,7 @@
         <input type="radio" name="option" value={{value+2}}>  {{question['options']['b']}} <br>
         <input type="radio" name="option" value={{value+3}}>  {{question['options']['c']}} <br>
         <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
+       <input  class="hidden" type="radio" name="option" value="{{question['answer']}}">
         <br>
        </form>
         {% endfor %}
@@ -44,6 +45,7 @@
         <input type="radio" name="option" value={{value+2}}>  {{question['options']['b']}} <br>
         <input type="radio" name="option" value={{value+3}}>  {{question['options']['c']}} <br>
         <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
+        <input  class="hidden" type="radio" name="option" value="{{question['answer']}}">
         <br>
        </form>
         {% endfor %}
@@ -58,6 +60,7 @@
         <input type="radio" name="option" value={{value+3}}>  {{question['options']['b']}} <br>
         <input type="radio" name="option" value={{value+1}}>  {{question['options']['c']}} <br>
         <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
+        <input  class="hidden" type="radio" name="option" value="{{question['answer']}}">
         <br>
        </form>
         {% endfor %}
@@ -69,7 +72,5 @@
     <button class="submitButton btn btn-dark p-3" type = "button">Submit</button>
   </div>
   
-
-  
-  
+ <script src="{{url_for('static', filename='js/submit.js')}}"></script>
 {% endblock %}

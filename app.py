@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from flask_mail import Mail, Message
 from decouple import config
-from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send
+from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList
@@ -194,15 +194,15 @@ def dashboard():
 
 
 
-@app.route('/questions')
+@app.route('/questions',methods = ["GET","POST"])
 # @login_required
 def questions():
     if request.method =="GET":
-        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 15)
+        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 5)
         javascript_structured_question_to_send = format_questions_to_send(javascript_questions_retrieved,'javascript')
-        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 15)
+        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 5)
         html_structured_question_to_send = format_questions_to_send(html_questions_retrieved,'html')
-        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank, 15)
+        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank, 5)
         css_structured_question_to_send = format_questions_to_send(css_questions_retrieved,'css')
         return render_template('questions.html',
                                javascript = javascript_structured_question_to_send,
@@ -210,9 +210,10 @@ def questions():
                                css = css_structured_question_to_send,
                                value=0)
     if request.method=="POST":
-        results = request.form
-        print(results)
-        return 'Success'
+        results =request.get_json()
+        scores = mark(results)
+        percentage = percentagilize(scores)
+        return 'Success you got {0} questions correct which is {1} percent'.format(scores,percentage)
         # score = mark(results)
     # return render_template('congratulations.html', score=score)
     # return render_template('questions.html',qBank= qBank, question=0, value=0)
