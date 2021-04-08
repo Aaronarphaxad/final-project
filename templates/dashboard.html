@@ -6,46 +6,63 @@ Home
 
 {% block main %}
 
-<h1 class="index-h1 mb-4">Let's get started</h1>
 
-<h3>RULES</h3>
-<hr>
-    <ul>
-    <li>You have 15 minutes to submit all answers.</li>
-    <li>Double-check your answers before submitting.</li>
-    </ul>
 
-<div class="container">
+
+  <div class="row">
+    <div class="top-dashboard">
+    <div>
+      <h1 class="index-h1 mb-4">Let's get started</h1>
+  
+      <h3>RULES</h3>
+    </div>
+    <div>
+      <hr>
+          <ul>
+          <li>You have 30 minutes to submit all answers.</li>
+          <li>Double-check your answers before submitting.</li>
+          <li>Do not switch tabs or refresh.</li>
+          <li>Do not check for answers online while answering the questions (for your own good)</li>
+          <li>15 questions are randomly selected from the database to be displayed each time you start a quiz</li>
+          </ul>
+    </div>
+  </div>
+   
+  </div>
     <div class="row">
+      <div class="lower-dashboard">
       <div class="col-sm">
-        <div class="card my-3" style="width: 18rem;">
+        <div class="card my-3">
             <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/js.png')}}" alt="Card image cap">
             <div class="card-body">
-              <p class="card-text">20 questions in javascript section, which would cover every important topic a beginner needs to know. This Section is 50% of the overall score.</p>
+              <p class="card-text">15 questions in javascript section, which would cover every important topic a beginner needs to know. This Section is 1/3 of the overall score.</p>
         </div>
       </div>    
     </div>
       <div class="col-sm">
-        <div class="card my-3" style="width: 18rem;">
+        <div class="card my-3">
             <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/css.png')}}" alt="Card image cap">
             <div class="card-body">
-              <p class="card-text">20 questions on Cascading Style Sheets which would challenge the rookie to learn more. It is 25% of the overall score. </p>
+              <p class="card-text">15 questions on Cascading Style Sheets which would challenge the rookie to learn more. It is 1/3 of the overall score. </p>
             </div>
           </div>
       </div>
       <div class="col-sm">
-        <div class="card my-3" style="width: 18rem;">
+        <div class="card my-3">
             <img class="card-img-top pt-2 pl-4" src="{{url_for('static',filename = 'images/html.png')}}" alt="Card image cap">
             <div class="card-body">
-              <p class="card-text">Answer 20 interesting, non-conventional HTML questions. It is 25% of the overall score.</p>
+              <p class="card-text">Answer 15 interesting, non-conventional HTML questions. It is 1/3 of the overall score.</p>
             </div>
         </div> <!--Card close-->
       </div> <!--Column close-->
     </div> <!--Row close-->
 </div> <!--Container close-->
 
-
-  <button type="button" class="btn btn-primary mt-5"><a class="start-btn p-5" href="/questions">START</a></button>
+  <div class="dash-btn-div mt-3">
+    <a class="start-btn" href="/questions"><button type="button" class="btn btn-primary py-3">START</button></a>
+  </div>
+</div>
+  
 
 <!-- <a href="/questions" class="mx-auto race button"><img src="{{url_for('static',filename = 'images/race.png')}}"></a> -->
 

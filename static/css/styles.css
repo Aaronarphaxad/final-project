@@ -1,7 +1,3 @@
-/* * {
-    outline: none;
-    box-sizing: border-box;
-   } */
 
    body {
     line-height:1.5;
@@ -116,15 +112,37 @@
 
 }
 
-.btn{
-    background-color: violet i !important;
+/* DASHBOARD */
+
+.top-dashboard{
+    display: flex;
+    flex-direction: column;
+}
+.lower-dashboard{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.dash-btn-div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .start-btn{
-    color: white;
+    display: block;
+    width: 80%;
     text-decoration: none;
+    color: white;
 }
 
+.btn{
+    width: 90% !important;
+}
+
+
+/* QUESTIONS */
 .qSubmitDiv{
     position: relative;
     display: flex;
@@ -137,15 +155,43 @@
 }
 
 
-/* .navbar-brand{
-    max-height: 20%;
-    max-width: 40%;
-} */
+.hidden {
+    display: none;
+}
 
 #footer{
 padding: 50px;
 }
 
-.hidden {
-    display: none;
+@media screen and (max-width:768px){
+    .lower-dashboard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
 }
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  
+    40% {
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px);
+    }
+  
+    80% {
+      -webkit-transform: translateY(-10px);
+      transform: translateY(-10px);
+    }
+  }
+
+  .btn:hover {
+    animation: bounce 1s;
+    background-color: #991b93 !important;
+    color: #fcf6f6 !important;
+  }

@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from flask_mail import Mail, Message
 from decouple import config
-from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize
+from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize,result_message
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList
@@ -38,6 +38,7 @@ class users(db.Model):
         self.hash_ = hash_
         self.email = email
 
+# Define question bank table
 class questions_bank(db.Model):
     id = db.Column('question_id', db.Integer, primary_key = True)
     topic = db.Column(db.String(10))
@@ -50,6 +51,16 @@ class questions_bank(db.Model):
         self.question = question
         self.options = options
         self.answer = answer
+
+# Define leaderboard table
+class leaderboard(db.Model):
+    id = db.Column('leader_id',db.Integer, primary_key = True)
+    username = db.Column(db.String(100))
+    score = db.Column(db.Integer)
+
+    def __init__(self, username, score):
+        self.username = username
+        self.score = score
 
 db.create_all()
 
@@ -195,14 +206,14 @@ def dashboard():
 
 
 @app.route('/questions',methods = ["GET","POST"])
-# @login_required
+@login_required
 def questions():
     if request.method =="GET":
-        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 5)
+        javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 15)
         javascript_structured_question_to_send = format_questions_to_send(javascript_questions_retrieved,'javascript')
-        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 5)
+        html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 15)
         html_structured_question_to_send = format_questions_to_send(html_questions_retrieved,'html')
-        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank, 5)
+        css_questions_retrieved = retrieve_questions_from_db('css',questions_bank, 15)
         css_structured_question_to_send = format_questions_to_send(css_questions_retrieved,'css')
         return render_template('questions.html',
                                javascript = javascript_structured_question_to_send,
@@ -213,10 +224,18 @@ def questions():
         results =request.get_json()
         scores = mark(results)
         percentage = percentagilize(scores)
-        return 'Success you got {0} questions correct which is {1} percent'.format(scores,percentage)
-        # score = mark(results)
+        message = result_message(percentage)
+        
+        username = session["user_id"]
+        score = percentage
+        user = leaderboard(username,score)     
+        db_session.add(user)
+        db_session.commit()
+        print(leaderboard.query.all())
+        return render_template('congratulations.html', message=message,scores=scores,percentage=percentage)
+        
     # return render_template('congratulations.html', score=score)
-    # return render_template('questions.html',qBank= qBank, question=0, value=0)
+   
 
 @app.route('/generate-questions', methods=["POST","GET"])
 # @login_required

@@ -30,7 +30,7 @@ def mark(submission):
 
 
 def format_for_table(req):
-    ''' helper function to format incoming form data to be suitable for db persistence '''
+    ''' helper function to format incoming form data to be suitable for db persistence. Takes the input and returns suitable data for the db'''
     topic = request.form['topic']
     question = request.form['question']
     option=request.form['options'].split(',')
@@ -79,5 +79,19 @@ def format_questions_to_send (db_query_result,topic):
  
 def percentagilize(score):
     '''convert the scores into a percentage'''
-    percentage = (score/15) *100
+    quotient = score/45
+    percentage = quotient * 100
     return percentage
+
+def result_message(percentage):
+    ''' A function to format the percentage score and pass to the frontend'''
+    if percentage >= 70:
+        return 'gold'
+    elif percentage >= 50 and percentage <= 69:
+        return 'silver'
+    elif percentage > 30 and percentage <= 49:
+        return 'bronze'
+    else:
+        return 'dust'
+    
+        

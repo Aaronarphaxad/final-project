@@ -1,5 +1,31 @@
+{% if message == 'gold' %}
+
+<img class="mx-auto" src="{{url_for('static',filename = 'images/medal.png')}}" alt="medal">
+
 <p>
-    Congratulations you got {{score}} questions correctly!!!
+    You got {{scores}} questions correct which is {{percentage}} percent. You won a gold medal. You're on the right track!
 </p>
+
+{% elif message == 'silver' %}
+
+
+<p>
+    You got {{scores}} questions correct which is {{percentage}} percent. You won a silver medal. You're almost there :)
+</p>
+
+
+{% elif message == 'bronze'  %}
+
+
+<p>
+    You got {{scores}} questions correct which is {{percentage}} percent. You won a bronze medal. You can do better!
+</p>
+
+{% else %}
+<p>
+    You got {{scores}} questions correct which is {{percentage}} percent. Poor result, keep studying. You got this!!
+</p>
+{% endif %}
+
 
 
