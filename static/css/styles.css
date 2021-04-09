@@ -163,6 +163,21 @@
 padding: 50px;
 }
 
+/* CONGRATULATIONS PAGE */
+.result-img{
+    width: 30%;
+    height: 20%;
+}
+
+.result-text{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* ANIMATIONS AND MEDIA QUERIES */
+
 @media screen and (max-width:768px){
     .lower-dashboard{
         display: flex;

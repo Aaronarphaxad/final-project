@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leaderboard
+{% endblock %}
+
+{% block main %}
+
+
+<table style="width:80%">
+    <tr>
+      <th>Username</th>
+      <th>Score</th>
+    </tr>
+    {% for leader in leaders %}
+    <tr>
+      <td>{{leader['username']}}</td>
+      <td>{{leader['score']}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, make_response
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from flask_mail import Mail, Message
 from decouple import config
-from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize,result_message
+from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize,result_message,format_leaderboard
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList
@@ -146,8 +146,11 @@ def login():
         # Remember which user has logged in
         session["user_id"] = user_id_
 
-        # Else Redirect user to dashboard
-        return redirect("/dashboard")
+        # Else Redirect user to dashboard after saving to a cookie
+        resp = make_response(redirect("/dashboard"))
+        resp.set_cookie('user_id', username)
+
+        return resp
 
     return render_template("login.html")
 
@@ -226,16 +229,24 @@ def questions():
         percentage = percentagilize(scores)
         message = result_message(percentage)
         
-        username = session["user_id"]
+        username = request.cookies.get("user_id")
         score = percentage
         user = leaderboard(username,score)     
-        db_session.add(user)
-        db_session.commit()
+        db.session.add(user)
+        db.session.commit()
         print(leaderboard.query.all())
         return render_template('congratulations.html', message=message,scores=scores,percentage=percentage)
         
     # return render_template('congratulations.html', score=score)
    
+
+@app.route('/leaderboard', methods = ["GET","POST"])
+# @login_required
+def leaderB():
+    table = leaderboard.query.order_by(leaderboard.score.desc()).limit(10).all()
+    leaders = format_leaderboard(table)
+    print(leaders)
+    return render_template("leaderboard.html", leaders=leaders)
 
 @app.route('/generate-questions', methods=["POST","GET"])
 # @login_required

@@ -1,31 +1,64 @@
 {% if message == 'gold' %}
 
-<img class="mx-auto" src="{{url_for('static',filename = 'images/medal.png')}}" alt="medal">
+<div class="container">
+    <div class="pl-3 d-flex justify-content-start">
+        <img class="result-img" src="{{url_for('static',filename = 'images/trophy.png')}}" alt="medal">
+    </div>
+    <div class="pr-3 d-flex justify-content-end">
+        <img class="result-img" src="{{url_for('static',filename = 'images/medal.png')}}" alt="medal">
+    </div>
 
-<p>
-    You got {{scores}} questions correct which is {{percentage}} percent. You won a gold medal. You're on the right track!
-</p>
+    <p class="p-3 d-flex justify-content-center result-text">
+        You got {{scores}} questions correct which is {{percentage}} percent. You won a gold medal. You're on the right track!
+    </p>
+</div>
+
+
 
 {% elif message == 'silver' %}
+<div>
+    <div class="py-3 d-flex justify-content-center">
+        <img class="result-img" src="{{url_for('static',filename = 'images/silver.png')}}" alt="medal">
+    </div>
+    <p class="p-3 d-flex justify-content-center result-text">
+        You got {{scores}} questions correct which is {{percentage}} percent. You won a silver medal. You're almost there :)
+    </p>
+</div>
 
 
-<p>
-    You got {{scores}} questions correct which is {{percentage}} percent. You won a silver medal. You're almost there :)
-</p>
+
 
 
 {% elif message == 'bronze'  %}
+<div class="container">
+    <div class="py-3 d-flex justify-content-center">
+        <img class="result-img" src="{{url_for('static',filename = 'images/bronze.png')}}" alt="medal">
+    </div>
+    
+    <p class="p-3 d-flex justify-content-center result-text">
+        You got {{scores}} questions correct which is {{percentage}} percent. You won a bronze medal. You can do better!
+    </p>
+</div>
 
-
-<p>
-    You got {{scores}} questions correct which is {{percentage}} percent. You won a bronze medal. You can do better!
-</p>
+    
 
 {% else %}
-<p>
-    You got {{scores}} questions correct which is {{percentage}} percent. Poor result, keep studying. You got this!!
-</p>
+
+<div class="container-fluid">
+    <div class="py-3 d-flex justify-content-center"> 
+        <img class="result-img" src="{{url_for('static',filename = 'images/dust.png')}}" alt="medal">
+    </div>
+    <p class="p-3 d-flex justify-content-center result-text">
+        You got {{scores}} questions correct which is {{percentage}} percent. Poor result, keep studying. You got this!!
+    </p>
+</div>
+
 {% endif %}
+
+
+<div class="d-flex justify-content-center">
+    <a href="{{url_for('questions')}}">Take another Quiz</a>
+</div>
 
 
 

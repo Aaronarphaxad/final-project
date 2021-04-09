@@ -81,7 +81,7 @@ def percentagilize(score):
     '''convert the scores into a percentage'''
     quotient = score/45
     percentage = quotient * 100
-    return percentage
+    return round(percentage)
 
 def result_message(percentage):
     ''' A function to format the percentage score and pass to the frontend'''
@@ -89,9 +89,20 @@ def result_message(percentage):
         return 'gold'
     elif percentage >= 50 and percentage <= 69:
         return 'silver'
-    elif percentage > 30 and percentage <= 49:
+    elif percentage > 40 and percentage <= 49:
         return 'bronze'
     else:
         return 'dust'
-    
-        
+
+
+def format_leaderboard(db_query_result):
+    ''' simple funtion to format leaderboard database result for front end'''
+    leaders=[]
+    for results in db_query_result:
+        leader = {
+            "username":results.username,
+            "score":results.score
+        }
+
+        leaders.append(leader)
+    return leaders
