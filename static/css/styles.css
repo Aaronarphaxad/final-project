@@ -12,6 +12,14 @@
         font-family: 'Orbitron', sans-serif;
     }
 
+    .alert.success {
+        background-color: green;
+      }
+      
+      .alert.error {
+        background-color: rgb(252, 11, 11);
+      }
+
     .rotate-text{
         font-family: 'Orbitron', sans-serif;
     }
@@ -173,6 +181,56 @@ padding: 50px;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+}
+
+
+/* LEADERBOARD */
+.lead-h1{
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0px 0px 7px rgba(157, 62, 180, 0.75);
+        color: #141414;
+        font-size: 40px;
+}
+
+.th{
+    font-weight: bolder;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3d3f1;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #faf5fa;
+}
+
+.styled-table tbody tr{
+    font-weight: bold;
+    color: #1f0f1e;
 }
 
 

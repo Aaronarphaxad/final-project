@@ -8,8 +8,8 @@
 
 <!-- Jinja For loop for flashed messagees -->
 {%- for category, message in get_flashed_messages(with_categories = true) %}
-         <div class = "alert alert-danger">
-            {{ message }}
+         <div class = "alert alert-{{category}}">
+            {{ message|capitalize }}
          </div>
       {%- endfor %}
       
@@ -25,6 +25,7 @@
         <div class="form-group">
             <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="email">
         </div>
+        {{ recaptcha }} <br/>
         <button class="btn btn-primary" type="submit">Register</button>
     </form>
 {% endblock %}

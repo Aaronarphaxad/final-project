@@ -6,11 +6,12 @@
 
 {% block main %}
 
+<h1 class="lead-h1 d-flex justify-content-center">Leaderboard</h1><br>
 
-<table style="width:80%">
+<table class="styled-table" style="width:100%">
     <tr>
-      <th>Username</th>
-      <th>Score</th>
+      <th class="th">USERNAME</th>
+      <th class="th">SCORE</th>
     </tr>
     {% for leader in leaders %}
     <tr>
@@ -20,5 +21,8 @@
     {% endfor %}
   </table>
 
+  <div class="d-flex justify-content-center">
+    <a href="{{url_for('questions')}}">Take another Quiz</a>
+</div>
 
 {% endblock %}

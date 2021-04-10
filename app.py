@@ -1,6 +1,7 @@
 import os
 from flask import Flask, flash, redirect, render_template, request, session, make_response
 from flask_session import Session
+from flask_recaptcha import ReCaptcha
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -13,8 +14,22 @@ from helpers import login_required, mark,format_for_table,add_question_to_db,ret
 import random
 import json
 from formParser import formparser,getInitialList,getFinalList
+from waitress import serve
+
 # Configure application
 app = Flask(__name__)
+
+# Configure Recaptcha
+recaptcha = ReCaptcha(app=app)
+
+app.config.update(dict(
+    RECAPTCHA_ENABLED = True,
+    RECAPTCHA_SITE_KEY = "6Le02qIaAAAAAPJ31HEUBOYVo7myKD0DKF0H2ZIv",
+    RECAPTCHA_SECRET_KEY = "6Le02qIaAAAAAKvfANf-aofpKFq9dW70SNktz2Q-",
+))
+
+recaptcha = ReCaptcha()
+recaptcha.init_app(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -183,13 +198,22 @@ def register():
             db.session.add(user)
             db.session.commit()
          
-            flash('Registration successful')
+            flash('Registration successful', 'success')
             
-            msg = Message('Hello', sender = config('EMAIL'), recipients = [email])
-            msg.body = "Thank you for joining Rookie Hub, good luck with your adventure :)"
+            msg = Message('Hello Rookie', sender = config('EMAIL'), recipients = [email])
+            msg.body = "Thank you for joining Rookie Hub, good luck with your adventure. :)"
             mail.send(msg)
 
             return redirect("/login", 302)
+
+        # if recaptcha.verify():
+        #     flash('New User Added successfully')
+        #     return redirect("/login")
+        # else:
+        #     flash('Error ReCaptcha')
+        #     return redirect("/register")
+
+            
     return render_template("register.html")
 
 
@@ -241,7 +265,7 @@ def questions():
    
 
 @app.route('/leaderboard', methods = ["GET","POST"])
-# @login_required
+@login_required
 def leaderB():
     table = leaderboard.query.order_by(leaderboard.score.desc()).limit(10).all()
     leaders = format_leaderboard(table)
@@ -267,3 +291,5 @@ def generate_questions():
                 
         
        
+if __name__ == "__main__":
+serve(app, host='0.0.0.0', port=80)
