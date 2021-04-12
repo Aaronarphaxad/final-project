@@ -83,7 +83,7 @@ class leaderboard(db.Model):
 db.create_all()
 
 # API key 
-app.secret_key = config('secret_key')
+app.secret_key = os.environ['secret_key']
 
 # Ensure responses aren't cached
 @app.after_request
