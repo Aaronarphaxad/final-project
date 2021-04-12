@@ -296,3 +296,5 @@ def generate_questions():
         return render_template('questionGetter.html')
                 
         
+if __name__ == '__main__':
+    app.run()
