@@ -203,7 +203,7 @@ def register():
          
             flash('Registration successful', 'success')
             
-            msg = Message('Hello Rookie', sender = config('EMAIL'), recipients = [email])
+            msg = Message('Hello Rookie', sender = os.environ['EMAIL'], recipients = [email])
             msg.body = "Thank you for joining Rookie Hub, good luck with your adventure. :)"
             mail.send(msg)
 
