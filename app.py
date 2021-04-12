@@ -38,7 +38,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'postgresql-tapered-63506'
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_used.db'
 
 # sqlite:///database_used.db
 
@@ -294,3 +294,4 @@ def generate_questions():
     if request.method == "GET":
         return render_template('questionGetter.html')
                 
+        
