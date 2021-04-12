@@ -22,18 +22,15 @@ app = Flask(__name__)
 # Configure Recaptcha
 recaptcha = ReCaptcha(app=app)
 
-app.config.update(dict(
-    RECAPTCHA_ENABLED = True,
-    RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY'),
-    RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
-))
+app.config['RECAPTCHA_SECRET_KEY']= config('RECAPTCHA_SECRET_KEY')
+app.config['RECAPTCHA_SITE_KEY'] = config('RECAPTCHA_SITE_KEY')
+app.config['RECAPTCHA_ENABLED'] = True
 
 recaptcha = ReCaptcha()
 recaptcha.init_app(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 # configure SQLITE
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
