@@ -24,7 +24,7 @@ recaptcha = ReCaptcha(app=app)
 
 app.config.update(dict(
     RECAPTCHA_ENABLED = True,
-    RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
+    RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY'),
     RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
 ))
 
@@ -38,10 +38,15 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_used.db'
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'postgresql-tapered-63506'
+
+# sqlite:///database_used.db
+
+# Pass SqlAlchemy into db variable
+db = SQLAlchemy(app)
 
 # Define users table
-db = SQLAlchemy(app)
+
 class users(db.Model):
     id = db.Column('user_id', db.Integer, primary_key = True)
     username = db.Column(db.String(100))
@@ -292,4 +297,7 @@ def generate_questions():
         
        
 if __name__ == "__main__":
-serve(app, host='0.0.0.0', port=80)
+    serve(app, host='0.0.0.0', port=5000)
+
+if __name__ == "__main__":
+    app.run(debug=True)
