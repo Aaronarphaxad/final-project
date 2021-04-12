@@ -38,7 +38,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_used.db'
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'postgres://wbkgznuabnkxhe:c06bd200175c780b66393f08ad5c6848f45b688398778484c5143acf50bcf563@ec2-35-174-35-242.compute-1.amazonaws.com:5432/drt7kds1ubc1b'
+
+# sqlite:///database_used.db
+
 
 # sqlite:///database_used.db
 
