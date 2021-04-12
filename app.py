@@ -294,10 +294,3 @@ def generate_questions():
     if request.method == "GET":
         return render_template('questionGetter.html')
                 
-        
-       
-if __name__ == "__main__":
-    serve(app, host='0.0.0.0', port=5000)
-
-if __name__ == "__main__":
-    app.run(debug=True)
