@@ -22,8 +22,8 @@ app = Flask(__name__)
 # Configure Recaptcha
 recaptcha = ReCaptcha(app=app)
 
-app.config['RECAPTCHA_SECRET_KEY']= config('RECAPTCHA_SECRET_KEY')
-app.config['RECAPTCHA_SITE_KEY'] = config('RECAPTCHA_SITE_KEY')
+app.config['RECAPTCHA_SECRET_KEY']= os.environ['RECAPTCHA_SECRET_KEY']
+app.config['RECAPTCHA_SITE_KEY'] = os.environ['RECAPTCHA_SITE_KEY']
 app.config['RECAPTCHA_ENABLED'] = True
 
 recaptcha = ReCaptcha()
@@ -101,10 +101,10 @@ Session(app)
 
 # Flask mail configuration
 
-app.config['MAIL_SERVER']=config('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(config('MAIL_PORT'))
-app.config['MAIL_USERNAME'] = config('EMAIL')
-app.config['MAIL_PASSWORD'] = int(config('PASSWORD'))
+app.config['MAIL_SERVER']=os.environ['MAIL_SERVER']
+app.config['MAIL_PORT'] = os.environ['MAIL_PORT']
+app.config['MAIL_USERNAME'] = os.environ['EMAIL']
+app.config['MAIL_PASSWORD'] = os.environ['PASSWORD']
 app.config['MAIL_USE_TLS'] =False
 app.config['MAIL_USE_SSL'] = True
 app.config['FLASK_ENV']='development'
