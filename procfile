@@ -1,1 +1,1 @@
-web: gunicorn app:app > Procfile
+web: flask db upgrade; flask translate compile; gunicorn rookiehub:app
