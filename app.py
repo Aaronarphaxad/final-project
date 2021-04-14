@@ -37,9 +37,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config ['SQLALCHEMY_DATABASE_URI'] = os.getenv(
-    "DATABASE_URL"
-).replace("postgres://", "postgresql://")
+app.config ['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL").replace("postgres://", "postgresql://")
 
 # sqlite:///database_used.db
 
