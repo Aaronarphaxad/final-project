@@ -6,20 +6,6 @@
 
 {% block main %}
   <div class="content">
-    <!-- Nav pills -->
-    <ul class="nav nav-pills" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" data-toggle="pill" href="#javascript">JS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#html">HTML</a>
-      </li>
-
-        <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#css">CSS</a>
-      </li>
-    </ul>
-
     <!-- Tab panes -->
     <div class="tab-content">
       <div id="javascript" class="container tab-pane active">
@@ -56,20 +42,38 @@
         {% for question in css['data'] %}
       <form class="formElem">
         <p>{{loop.index}}. {{question['question']}} </p> 
-        <input type="radio" name="option" value={{value+2}}>  {{question['options']['a']}} <br>
-        <input type="radio" name="option" value={{value+3}}>  {{question['options']['b']}} <br>
-        <input type="radio" name="option" value={{value+1}}>  {{question['options']['c']}} <br>
-        <input type="radio" name="option" value={{value+4}}>  {{question['options']['d']}} <br>
-        <input  class="hidden" type="radio" name="option" value="{{question['answer']}}">
-        <br>
+          <input id="option1" type="radio" name="option" value={{value+2}}>
+          <label for="option1"> {{question['options']['a']}}</label> <br>
+          <input id="option2" type="radio" name="option" value={{value+3}}> 
+          <label for="option2"> {{question['options']['b']}}</label> <br>
+          <input id="option3" type="radio" name="option" value={{value+1}}> 
+          <label for="option3"> {{question['options']['c']}}</label> <br>
+          <input id="option4" type="radio" name="option" value={{value+4}}> 
+          <label for="option4"> {{question['options']['d']}}</label> <br>
+          <input  class="hidden" type="radio" name="option" value="{{question['answer']}}">
+          <br>
        </form>
         {% endfor %}
       </div>
     </div>
+
+    <!-- Nav pills -->
+    <ul class="nav nav-pills" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#javascript">JS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#html">HTML</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#css">CSS</a>
+      </li>
+    </ul>
   </div>
 
   <div class="qSubmitDiv">
-    <button class="submitButton btn btn-primary p-3" type = "button">Submit</button>
+    <button id="submitF" class="submitButton btn btn-primary p-3" type = "button">Submit</button>
   </div>
   
  <script src="{{url_for('static', filename='js/submit.js')}}"></script>

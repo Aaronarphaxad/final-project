@@ -22,12 +22,28 @@ app = Flask(__name__)
 # Configure Recaptcha
 recaptcha = ReCaptcha(app=app)
 
-app.config['RECAPTCHA_SECRET_KEY']= os.environ['RECAPTCHA_SECRET_KEY']
-app.config['RECAPTCHA_SITE_KEY'] = os.environ['RECAPTCHA_SITE_KEY']
-app.config['RECAPTCHA_ENABLED'] = True
+class ReCaptha():
+    # self generated
+    SECRET_KEY = 'verylongstringhasgwhatever' 
+    RECAPTCHA_USE_SSL= False
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_SITE_KEY') # google generated
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_SECRET_KEY') # google generated
+    RECAPTCHA_DATA_ATTRS = {'theme': 'light'}
 
-recaptcha = ReCaptcha()
-recaptcha.init_app(app)
+def is_human(captcha_response):
+    payload = {'response': captcha_response, 'secret': private_key}
+    response = post("https://www.google.com/recaptcha/api/siteverify", data=payload)
+    response_text = json.loads(response.text)
+    return response_text['success']
+
+# app.config['RECAPTCHA_SECRET_KEY']= os.environ['RECAPTCHA_SECRET_KEY']
+# app.config['RECAPTCHA_SITE_KEY'] = os.environ['RECAPTCHA_SITE_KEY']
+# app.config['RECAPTCHA_ENABLED'] = True
+
+app.config.from_object(ReCaptha)
+
+pub_key = os.environ.get('RECAPTCHA_SITE_KEY')
+private_key = os.environ.get('RECAPTCHA_SECRET_KEY')
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -83,7 +99,7 @@ class leaderboard(db.Model):
 db.create_all()
 
 # API key 
-app.secret_key = os.environ['secret_key']
+app.secret_key = os.environ.get('secret_key')
 
 # Ensure responses aren't cached
 @app.after_request
@@ -101,10 +117,10 @@ Session(app)
 
 # Flask mail configuration
 
-app.config['MAIL_SERVER']=os.environ['MAIL_SERVER']
-app.config['MAIL_PORT'] = os.environ['MAIL_PORT']
-app.config['MAIL_USERNAME'] = os.environ['EMAIL']
-app.config['MAIL_PASSWORD'] = os.environ['PASSWORD']
+app.config['MAIL_SERVER']=os.environ.get('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL')
+app.config['MAIL_PASSWORD'] = os.environ.get('PASSWORD')
 app.config['MAIL_USE_TLS'] =False
 app.config['MAIL_USE_SSL'] = True
 app.config['FLASK_ENV']='development'
@@ -175,6 +191,7 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
+        captcha_response = request.form['g-recaptcha-response']
         username =  request.form['username']
         password = request.form['password']
         email = request.form['email']
@@ -194,6 +211,8 @@ def register():
             flash('Username already exists', 'error')
         elif len(email_check) != 0:
             flash('Email already exists', 'error')
+        elif not is_human(captcha_response):
+            flash('Verify you are human', 'error')
         else:
             hash_ = generate_password_hash(password)
             user = users(username, hash_, email)
@@ -208,6 +227,8 @@ def register():
             mail.send(msg)
 
             return redirect("/login", 302)
+    # If request method=get
+    return render_template("register.html",pub_key=pub_key)
 
         # if recaptcha.verify():
         #     flash('New User Added successfully')
@@ -217,7 +238,7 @@ def register():
         #     return redirect("/register")
 
             
-    return render_template("register.html")
+    
 
 
 @app.route("/logout")
@@ -239,6 +260,7 @@ def dashboard():
 @login_required
 def questions():
     if request.method =="GET":
+        # Make use of helper functions to retrieve data from db and format for use in front end 
         javascript_questions_retrieved = retrieve_questions_from_db('javascript',questions_bank, 15)
         javascript_structured_question_to_send = format_questions_to_send(javascript_questions_retrieved,'javascript')
         html_questions_retrieved = retrieve_questions_from_db('html',questions_bank, 15)
@@ -251,6 +273,7 @@ def questions():
                                css = css_structured_question_to_send,
                                value=0)
     if request.method=="POST":
+        # On submit, Ajax was used to send the form data in a json format. And it makes use of helper functions to mark, percentagilize and formatted to pass message to client side
         results =request.get_json()
         scores = mark(results)
         percentage = percentagilize(scores)
@@ -292,6 +315,6 @@ def generate_questions():
     if request.method == "GET":
         return render_template('questionGetter.html')
                 
-        
-if __name__ == '__main__':
-    app.run()
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080,debug=True)
