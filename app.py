@@ -8,7 +8,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from questionPack import qBank
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
-from flask_mail import Mail, Message
 from decouple import config
 from helpers import login_required, mark,format_for_table,add_question_to_db,retrieve_questions_from_db,format_questions_to_send,percentagilize,result_message,format_leaderboard
 import random
@@ -21,29 +20,16 @@ app = Flask(__name__)
 
 # Configure Recaptcha
 recaptcha = ReCaptcha(app=app)
+ 
+app.config.update(dict(
+    RECAPTCHA_ENABLED = True,
+    RECAPTCHA_SITE_KEY = '6LfunKgaAAAAAHmSxgjgkZdlY6U-0e3tB-A4gyIJ',
+    RECAPTCHA_SECRET_KEY = '6LfunKgaAAAAAOV4ht2s-gv03HXn1ejT2nZ8fe0w',
+))
+ 
+recaptcha = ReCaptcha()
+recaptcha.init_app(app)
 
-class ReCaptha():
-    # self generated
-    SECRET_KEY = 'verylongstringhasgwhatever' 
-    RECAPTCHA_USE_SSL= False
-    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_SITE_KEY') # google generated
-    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_SECRET_KEY') # google generated
-    RECAPTCHA_DATA_ATTRS = {'theme': 'light'}
-
-def is_human(captcha_response):
-    payload = {'response': captcha_response, 'secret': private_key}
-    response = post("https://www.google.com/recaptcha/api/siteverify", data=payload)
-    response_text = json.loads(response.text)
-    return response_text['success']
-
-# app.config['RECAPTCHA_SECRET_KEY']= os.environ['RECAPTCHA_SECRET_KEY']
-# app.config['RECAPTCHA_SITE_KEY'] = os.environ['RECAPTCHA_SITE_KEY']
-# app.config['RECAPTCHA_ENABLED'] = True
-
-app.config.from_object(ReCaptha)
-
-pub_key = os.environ.get('RECAPTCHA_SITE_KEY')
-private_key = os.environ.get('RECAPTCHA_SECRET_KEY')
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -115,19 +101,6 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Flask mail configuration
-
-app.config['MAIL_SERVER']=os.environ.get('MAIL_SERVER')
-app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL')
-app.config['MAIL_PASSWORD'] = os.environ.get('PASSWORD')
-app.config['MAIL_USE_TLS'] =False
-app.config['MAIL_USE_SSL'] = True
-app.config['FLASK_ENV']='development'
-app.config['FLASK_DEBUG'] = True
-mail = Mail(app)
-
-
 
 # ROUTES START
 
@@ -191,7 +164,6 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
-        captcha_response = request.form['g-recaptcha-response']
         username =  request.form['username']
         password = request.form['password']
         email = request.form['email']
@@ -211,8 +183,8 @@ def register():
             flash('Username already exists', 'error')
         elif len(email_check) != 0:
             flash('Email already exists', 'error')
-        elif not is_human(captcha_response):
-            flash('Verify you are human', 'error')
+        elif not recaptcha.verify():
+            flash('Error Recaptcha', 'error')
         else:
             hash_ = generate_password_hash(password)
             user = users(username, hash_, email)
@@ -221,14 +193,10 @@ def register():
             db.session.commit()
          
             flash('Registration successful', 'success')
-            
-            msg = Message('Hello Rookie', sender = os.environ['EMAIL'], recipients = [email])
-            msg.body = "Thank you for joining Rookie Hub, good luck with your adventure. :)"
-            mail.send(msg)
 
             return redirect("/login", 302)
     # If request method=get
-    return render_template("register.html",pub_key=pub_key)
+    return render_template("register.html")
 
         # if recaptcha.verify():
         #     flash('New User Added successfully')
