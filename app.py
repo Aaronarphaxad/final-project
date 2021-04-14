@@ -49,7 +49,7 @@ db = SQLAlchemy(app)
 class users(db.Model):
     id = db.Column('user_id', db.Integer, primary_key = True)
     username = db.Column(db.String(100))
-    hash_ = db.Column(db.String(50))  
+    hash_ = db.Column(db.String(200))  
     email = db.Column(db.String(200))
 
     def __init__(self, username, hash_, email):
