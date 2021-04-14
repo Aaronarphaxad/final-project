@@ -14,6 +14,7 @@ import random
 import json
 from formParser import formparser,getInitialList,getFinalList
 from waitress import serve
+import re
 
 # Configure application
 app = Flask(__name__)
@@ -37,7 +38,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config ['SQLALCHEMY_DATABASE_URI'] = 'postgresql://wbkgznuabnkxhe:c06bd200175c780b66393f08ad5c6848f45b688398778484c5143acf50bcf563@ec2-35-174-35-242.compute-1.amazonaws.com:5432/drt7kds1ubc1b'
+uri = "postgres://wbkgznuabnkxhe:c06bd200175c780b66393f08ad5c6848f45b688398778484c5143acf50bcf563@ec2-35-174-35-242.compute-1.amazonaws.com:5432/drt7kds1ubc1b"
+app.config ['SQLALCHEMY_DATABASE_URI'] = uri
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 
 # sqlite:///database_used.db
