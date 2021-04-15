@@ -232,6 +232,13 @@ padding: 50px;
     color: #1f0f1e;
 }
 
+/* RECAPTCHA */
+
+.recaptcha{
+    font-size:0.6rem;
+    padding: 10px;
+}
+
 
 /* ANIMATIONS AND MEDIA QUERIES */
 
