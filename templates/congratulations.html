@@ -1,7 +1,7 @@
 {% if message == 'gold' %}
 
 <div class="container">
-    <div class="pl-3 d-flex justify-content-start">
+    <div class="pl-3 pt-3 d-flex justify-content-start">
         <img class="result-img" src="{{url_for('static',filename = 'images/trophy.png')}}" alt="medal">
     </div>
     <div class="pr-3 d-flex justify-content-end">
@@ -9,7 +9,7 @@
     </div>
 
     <p class="p-3 d-flex justify-content-center result-text">
-        You got {{scores}} questions correct, which is {{percentage}}%. You won a gold medal. You're on the right track!
+        You got {{scores}} questions correct, which is {{percentage}}%. You won a gold medal. You're on the right track!😊
     </p>
 </div>
 
@@ -21,7 +21,7 @@
         <img class="result-img" src="{{url_for('static',filename = 'images/silver.png')}}" alt="medal">
     </div>
     <p class="p-3 d-flex justify-content-center result-text">
-        You got {{scores}} questions correct, which is {{percentage}}%. You won a silver medal. You're almost there :)
+        You got {{scores}} questions correct, which is {{percentage}}%. You won a silver medal. You're almost there 😊
     </p>
 </div>
 
