@@ -33,7 +33,7 @@ recaptcha.init_app(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-# configure SQLITE
+# configure Database
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
